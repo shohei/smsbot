@@ -5,3 +5,6 @@ Default baud rate is 19200-8N-1
 
 
 http://www.seeedstudio.com/wiki/GPRS_Shield_V1.0
+
+
+## Use Arduino 1.6.5
