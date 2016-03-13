@@ -9,9 +9,6 @@ void setup() {
     // wait serial port initialization
   }
 
-//  char json[] =
-//    "{\"sensor\":\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}";
-
 }
 
 void loop() {
@@ -29,19 +26,6 @@ void loop() {
     }
   }
 
-  //    while(!end){
-  //      char c = Serial.read();
-  //      if (c == '{') {
-  //        begin = true;
-  //      }
-  //      if (begin) response += (c);
-  //      if (c == '}') {
-  //        end = true;
-  //        break;
-  //      }
-  //      delay(1);
-  //     }
-
   const char *charBuf = response.c_str();
   DynamicJsonBuffer jsonBuffer;
   JsonObject& root = jsonBuffer.parseObject(charBuf);
@@ -51,9 +35,6 @@ void loop() {
   }
   const char* message = root["message"];
   const char* tel = root["tel"];
-//  long time = root["time"];
-//  double latitude = root["data"][0];
-//  double longitude = root["data"][1];
   Serial.println(message);
   Serial.println(tel);
 }
