@@ -8,3 +8,6 @@ http://www.seeedstudio.com/wiki/GPRS_Shield_V1.0
 
 
 ## Use Arduino 1.6.5
+
+
+## The official switch for Soft/Hard Serial is wrong. It is inverse.
