@@ -18,9 +18,13 @@ void setup()
 {
   mySerial.begin(19200);               // the GPRS baud rate
   Serial.begin(19200);    // the GPRS baud rate
+  while(!mySerial){
+    //wait soft serial initialization
+  }
   while (!Serial) {
     // wait serial port initialization
   }
+  Serial.println("SoftSerial and Serial initialized.");
   delay(500);
 }
 
@@ -29,6 +33,8 @@ void loop()
   String response;
   bool begin = false;
   bool end = false;
+
+//  ShowSerialData();
 
   while (!end) {
     if (Serial.available() > 0)
@@ -47,12 +53,16 @@ void loop()
     Serial.println("parseObject() failed");
     return;
   }
-  const char* message = root["message"];
   const char* tel = root["tel"];
-  Serial.println(message);
-  Serial.println(tel);
-  SendTextMessage(tel, message);
-  delay(3000);
+  const char* message = root["message"];
+  String phoneNumber = tel;
+  String msg = message;
+  Serial.println(phoneNumber);
+  Serial.println(msg);
+  SendTextMessage(phoneNumber, msg);
+
+//  ShowSerialData();
+
 }
 
 ///SendTextMessage()
@@ -63,14 +73,22 @@ void SendTextMessage(String phoneNumber, String message)
   delay(100);
   String command = "AT + CMGS = \"" + phoneNumber + "\"";
   mySerial.println(command);//send sms message, be careful need to add a country code before the cellphone number
+  Serial.println("Sending command to GMS: "+command);
   delay(100);
   mySerial.println(message);//the content of the message
+  Serial.println("Sending command to GMS: "+message);
   delay(100);
   mySerial.println();
   delay(100);
   mySerial.write(0x1A);
   delay(100);
   mySerial.println();
+//  delay(5000);
+  while(!mySerial.available()){
+    //halt until serial data
+  }
+  ShowSerialData();
+  Serial.println("SendTextMessage() finished.");
 }
 
 void ShowSerialData()
