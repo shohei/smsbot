@@ -11,3 +11,5 @@ http://www.seeedstudio.com/wiki/GPRS_Shield_V1.0
 
 
 ## The official switch for Soft/Hard Serial is wrong. It is inverse.
+
+Use 12V, 2 amp. AC Adapter for powering Arduino. Otherwise GPRS shield shutdowns due to lack of power.
